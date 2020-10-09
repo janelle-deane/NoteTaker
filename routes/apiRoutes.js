@@ -5,11 +5,14 @@ const router = express.Router();
   
 // When page loads, read existing data
 const dbData= JSON.parse(fs.readFileSync(path.join(__dirname,"../db/db.json")));
-console.log(dbData);
+// console.log(dbData);
 
+router.post("dbData")
 // Get route for Note API
   router.get("/api/notes", function(req, res) {
-    res.sendFile(path.join(__dirname,"../db/db.json"));
+    console.log(dbData) 
+    res.json(dbData)
+    // res.sendFile(path.join(__dirname,"../db/db.json"));
   });
 
 
