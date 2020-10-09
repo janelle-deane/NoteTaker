@@ -9,3 +9,5 @@
 // This means you'll need to find a way to give each note a unique id when it's saved. In order to delete a note, 
 // you'll need to read all notes from the db.json file, remove the note with the given id property, 
 // and then rewrite the notes to the db.json file.
+
+// GET * - Should return the index.html file
