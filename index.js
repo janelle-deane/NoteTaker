@@ -1,3 +1,26 @@
+// DEPENDENCIES
+// Series of npm packages that we will use to give our server useful functionality
+// ==============================================================================
+var path = require("path"); 
+var express = require("express");
+var fs = require("fs")
+
+// EXPRESS CONFIGURATION
+// This sets up the basic properties for our express server
+// ==============================================================================
+
+// Tells node that we are creating an "express" server
+var app = express();
+
+// Sets an initial port and compatiable with Heroku 
+var PORT = process.env.PORT || 8080;
+
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+
 // GET /notes - Should return the notes.html file.
 
 // GET /api/notes - Should read the db.json file and return all saved notes as JSON.
@@ -11,3 +34,10 @@
 // and then rewrite the notes to the db.json file.
 
 // GET * - Should return the index.html file
+
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
+  
