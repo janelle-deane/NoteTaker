@@ -19,7 +19,7 @@ var PORT = process.env.PORT || 8080;
 
 // Sets up the linking to index js
 // =============================================================
-// app.use(express.static("public"))
+app.use(express.static("public"))
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
