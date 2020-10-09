@@ -20,10 +20,34 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
+// Routes
+// =============================================================
 
-// GET /notes - Should return the notes.html file.
+// Returns index.html file
+app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "view.html"));
+  });
 
-// GET /api/notes - Should read the db.json file and return all saved notes as JSON.
+// GET *  Return the index.html file
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "view.html"));
+  });
+
+  
+//   Returns notes.html file
+  app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "notes.html"));
+  });
+  
+  // GET /api/notes - Should read the db.json file and return all saved notes as JSON.
+  // Displays the db.json and returns the saved all notes
+  app.get("/api/notes", function(req, res) {
+    return res.json(NOTES);
+  });
+
+
+
+
 
 // POST /api/notes - Should receive a new note to save on the request body, add it 
 // to the db.json file, and then return the new note to the client.
@@ -33,7 +57,7 @@ app.use(express.json());
 // you'll need to read all notes from the db.json file, remove the note with the given id property, 
 // and then rewrite the notes to the db.json file.
 
-// GET * - Should return the index.html file
+
 
 // Starts the server to begin listening
 // =============================================================
