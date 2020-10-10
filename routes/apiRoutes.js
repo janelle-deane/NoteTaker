@@ -44,15 +44,19 @@ router.post("/notes", function(req, res) {
 // and then rewrite the notes to the db.json file.
 
 // DELETE /api/notes/:id -uses unique ID to select and delete unneed notes
-const data= require("../db/db.json")
-console.log(data);
+// const data= require("../db/db.json")
+console.log(dbData);
 router.delete("/notes/:id", function(req, res){
     let idDelete = req.params.id;
-    for (let i = 0; i < data.length; i++) {
-        if(idDelete===data[i].id){
-            idDelete.splice(i,1)
-        }
-    }  
+
+    let finalNotes = dbData.filter((newNotes) => newNotes.id != idDelete); 
+    fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(finalNotes, null, 2));
+    res.send(true);
+    // for (let i = 0; i < dbData.length; i++) {
+    //     if(idDelete===dbData[i].id){
+    //         idDelete.splice(i,1)
+        // }
+    // }  
 })
 
 
