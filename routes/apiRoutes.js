@@ -7,12 +7,10 @@ let notes =[];
 
 // When page loads, read existing data
 const dbData= JSON.parse(fs.readFileSync(path.join(__dirname,"../db/db.json")));
-// console.log(`THIS is OG:`,dbData);
 
-// router.post("dbData")
+
 // Get route for Note API
   router.get("/notes", function(req, res) {
-    console.log(`THIS is GET:`,  dbData) 
     res.json(dbData)
     res.sendFile(path.join(__dirname,"../db/db.json"));
   });
@@ -30,36 +28,16 @@ router.post("/notes", function(req, res) {
         console.log(newDbData)
     notes.push(newDbData);
     let newNotes = notes.concat(dbData);
-    console.log(`THIS is POST:`,dbData);
-    console.log(`THIS is Notes:`,newNotes);
-    
     fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(newNotes, null, 2));
     res.json(newNotes);
   })
 
-
-// - Should receive a query parameter containing the id of a note to delete. 
-// This means you'll need to find a way to give each note a unique id when it's saved. In order to delete a note, 
-// you'll need to read all notes from the db.json file, remove the note with the given id property, 
-// and then rewrite the notes to the db.json file.
-
 // DELETE /api/notes/:id -uses unique ID to select and delete unneed notes
-// const data= require("../db/db.json")
-console.log(dbData);
 router.delete("/notes/:id", function(req, res){
     let idDelete = req.params.id;
-
     let finalNotes = dbData.filter((newNotes) => newNotes.id != idDelete); 
     fs.writeFileSync(path.join(__dirname, "../db/db.json"), JSON.stringify(finalNotes, null, 2));
     res.send(true);
-    // for (let i = 0; i < dbData.length; i++) {
-    //     if(idDelete===dbData[i].id){
-    //         idDelete.splice(i,1)
-        // }
-    // }  
 })
-
-
-
 
 module.exports=router;

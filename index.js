@@ -1,11 +1,7 @@
 // DEPENDENCIES
 // Series of npm packages that we will use to give our server useful functionality
 // ==============================================================================
-const path = require("path"); 
 const express = require("express");
-const fs = require("fs");
-const router = express.Router();
-
 
 // EXPRESS CONFIGURATION
 // This sets up the basic properties for our express server
